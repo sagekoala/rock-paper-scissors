@@ -11,6 +11,24 @@ function getComputerChoice() {
     return choices[rand_num];
 }
 
+function getUserChoice() {
+
+    // Intialize userChoice
+    let userChoice = "random";
+
+    // Create const array with available choices
+    const choices = ["rock", "paper", "scissors"];
+
+
+    // Limits user response to correct string values, eliminates case sensitivity
+    while (!choices.includes(userChoice.toLowerCase())) {
+        // Prompt user for a selection and store value in a variable
+        userChoice = prompt("Choose a value rock, paper or scissors: ").toLowerCase(); 
+    }
+
+    return userChoice;
+}
+
 // Write playRound function that takes userChoice and compChoice and returns winner
 function playRound(userChoice, getComputerChoice) {
 
@@ -51,14 +69,14 @@ function playTournament(n) {
 
     // Initialize results variable to serve as string array
     let results;
+    let userChoice;
     
     // Initialize score variables
     let userScore = 0;
     let compScore = 0;
 
     for (let i = 0; i < n; i ++) {
-        // Prompt user for a selection and store value in a variable
-        const userChoice = prompt("Choose a value rock, paper or scissors: ");  
+        userChoice = getUserChoice();
         results = playRound(userChoice, getComputerChoice);
         displayResults(results);
         if (results[0] === "user") {
