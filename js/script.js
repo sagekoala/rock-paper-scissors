@@ -1,6 +1,6 @@
 // Program for the tradional game rock-paper-scissors
-// Write function to get random selection by computer
 
+// Write function to get random selection by computer
 function getComputerChoice() {
     // Create const array with available choices
     const choices = ["rock", "paper", "scissors"];
