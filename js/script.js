@@ -12,17 +12,14 @@ function getComputerChoice() {
 }
 
 function getUserChoice() {
-
     // Intialize userChoice
     let userChoice = "random";
 
     // Create const array with available choices
     const choices = ["rock", "paper", "scissors"];
 
-
     // Limits user response to correct string values, eliminates case sensitivity
     while (!choices.includes(userChoice.toLowerCase())) {
-        // Prompt user for a selection and store value in a variable
         userChoice = prompt("Choose a value rock, paper or scissors: ").toLowerCase(); 
     }
 
