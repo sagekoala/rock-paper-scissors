@@ -1,22 +1,20 @@
 // Program for the tradional game rock-paper-scissors
 
-// Write function to get random selection by computer
+// Global variable of possible choices
+const choices = ["rock", "paper", "scissors"];
+
 function getComputerChoice() {
-    // Create const array with available choices
-    const choices = ["rock", "paper", "scissors"];
-    // Create random variable with value between 0-2
+
+    // Random number between 0 and 2
     const rand_num = Math.floor(Math.random() * 3);
 
-    // Return value at index of rand_num 
+    // Return choice from choices array at the rand_num index
     return choices[rand_num];
 }
 
 function getUserChoice() {
-    // Intialize userChoice
-    let userChoice = "random";
 
-    // Create const array with available choices
-    const choices = ["rock", "paper", "scissors"];
+    let userChoice = "random";
 
     // Limits user response to correct string values, eliminates case sensitivity
     while (!choices.includes(userChoice.toLowerCase())) {
@@ -26,7 +24,6 @@ function getUserChoice() {
     return userChoice;
 }
 
-// Write playRound function that takes userChoice and compChoice and returns winner
 function playRound(userChoice, getComputerChoice) {
 
     // Exectute function and store compChoice
@@ -53,9 +50,9 @@ function playRound(userChoice, getComputerChoice) {
 // Display results based on results returned by playRound()
 function displayResults(results) {
     if (results[0] === "user") {
-        console.log(`userChoice wins! ${results[2]} beats ${results[3]}`); 
+        console.log(`User wins! ${results[2]} beats ${results[3]}`); 
     } else if (results[0] === "computer") {
-        console.log(`compChoice wins! ${results[2]} beats ${results[3]}`);
+        console.log(`Computer wins! ${results[2]} beats ${results[3]}`);
     } else {
         console.log(`Tie! Computer Choice: ${results[1]} User Choice: ${results[2]}`);
     }
