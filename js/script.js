@@ -19,6 +19,8 @@ function getComputerChoice() {
 
 function getRoundWinner(playerSelection, computerSelection) {
 
+    displaySelections(playerSelection, computerSelection);
+    
     // Compare computer and player choices, return result
     if (computerSelection === playerSelection) {
         return 'Tie';
@@ -58,7 +60,7 @@ function playRound(result) {
     const playerSelection = result.toLowerCase();
     const computerSelection = getComputerChoice().toLowerCase();
     const roundWinner = getRoundWinner(playerSelection, computerSelection);
-    console.log(`P ${playerSelection} | C${computerSelection}`);
+    console.log(`P ${playerSelection} | C ${computerSelection}`);
     updateScore(roundWinner);
 
 }
@@ -70,74 +72,45 @@ function endMatch() {
 }
 
 function updateScore(roundWinner) {
+
+    const scoreboardDiv = document.querySelector('#scoreboard');
+    const roundWinnerDiv = document.querySelector('#roundWinner');
+
     // Update player scores except for tie
     if (`${roundWinner}` in scores) {
         scores[`${roundWinner}`] += 1;
     }
 
+    // Update round winner and score divs
+    scoreboardDiv.innerText = `Player ${scores['Player']} | Computer ${scores['Computer']}`;
+
+    if (roundWinner !== 'Tie') {
+        roundWinnerDiv.innerText = `${roundWinner} wins!`;
+    } else {
+        roundWinnerDiv.innerText = 'Tie!';
+    }
+
+
     // Once an opponent reaches 5 points, end match
     if (scores["Player"] === 5 || scores["Computer"] === 5) {
         endMatch();
-        displayWinner(); // function that displays text div with winner's name
+        displayGrandWinner();
     }
-
-    console.log(scores);
 }
 
-function displayWinner() {
+function displaySelections(playerSelection, computerSelection) {
+    const selectionsDiv = document.querySelector('#selections');
+    console.log(selectionsDiv);
+    selectionsDiv.innerText = `Player - ${playerSelection} | Computer - ${computerSelection}`;
+}
 
+function displayGrandWinner() {
+
+    const grandWinnerDiv = document.querySelector('#grandWinner');
     // Loop through dict, store key with value of 5
     for (let key in scores) {
         if (scores[key] === 5) {
-            console.log(`name of person with 5 ${key}`);
-            console.log(scores);
+            grandWinnerDiv.innerText = `${key} is the winner!`;
         }
     }
 }
-
-// In order to remove event listener 
-// you have to have used a named function
-// for your eventHandler function
-// that way you can "dereference it" with
-// a removeEventListener() function that
-// calls the exact same eventHandler function
-
-/*
-// Calling function, handling button event that was clicked
-// i.e. user choice
-playRound(function(result) {
-
-    const playerSelection = result.toLowerCase();
-    const computerSelection = getComputerChoice().toLowerCase();
-    let roundWinner = getRoundWinner(playerSelection, computerSelection);
-
-    if (roundWinner === "Player") {
-        scores["playerScore"] += 1;
-    } else if (roundWinner === "Computer") {
-        scores["computerScore"] += 1;
-    }
-
-    console.log(`Player selection : ${playerSelection}`);
-    console.log(`Computer selection : ${computerSelection}`);
-    console.log(`Round winner ${roundWinner}`);
-    console.log(scores);
-
-    if (scores["playerScore"] > 1) {
-        console.log("RUNNING END MATCH");
-        endMatch();
-    }
-
-    console.log("ANOTHER ROUND");
-
-});
-
-// Function that will return value from eventListener i.e. event handler
-function playRound(callback) {
-    buttons.forEach((button) => {
-        button.addEventListener('click', (e) => {
-            callback(e.srcElement.innerText);
-        });
-    });
-}
-
-*/
