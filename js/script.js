@@ -7,9 +7,7 @@ let scores = {
     "Computer": 0
 };
 
-
 function getComputerChoice() {
-
     // Return random choice from choices array
     const choices = ['rock', 'paper', 'scissors'];
     const rand_num = Math.floor(Math.random() * 3);
@@ -19,9 +17,10 @@ function getComputerChoice() {
 
 function getRoundWinner(playerSelection, computerSelection) {
 
+    // Pass selections to display function
     displaySelections(playerSelection, computerSelection);
     
-    // Compare computer and player choices, return result
+    // Compare computer and player choices, return round winner
     if (computerSelection === playerSelection) {
         return 'Tie';
     } else if (computerSelection === "rock" && playerSelection === "scissors") {
@@ -60,7 +59,6 @@ function playRound(result) {
     const playerSelection = result.toLowerCase();
     const computerSelection = getComputerChoice().toLowerCase();
     const roundWinner = getRoundWinner(playerSelection, computerSelection);
-    console.log(`P ${playerSelection} | C ${computerSelection}`);
     updateScore(roundWinner);
 
 }
@@ -95,6 +93,9 @@ function updateScore(roundWinner) {
     if (scores["Player"] === 5 || scores["Computer"] === 5) {
         endMatch();
         displayGrandWinner();
+
+        // Remove roundWinner 
+        roundWinnerDiv.style.display = 'none';
     }
 }
 
@@ -111,6 +112,8 @@ function displayGrandWinner() {
     for (let key in scores) {
         if (scores[key] === 5) {
             grandWinnerDiv.innerText = `${key} is the winner!`;
+            grandWinnerDiv.style.borderBottom = '1px solid white';
+            grandWinnerDiv.style.borderTop = '1px solid white';
         }
     }
 }
